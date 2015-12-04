@@ -1,4 +1,3 @@
-source("helper.R", local = TRUE)
 library(shiny)
 
 shinyServer(function(input, output) {
