@@ -1,8 +1,4 @@
 library(shiny)
-
-source('setup_twitter_oauth.R')
-source('helper.R')
-
 shinyServer(function(input, output) {
 
   df <- reactive({

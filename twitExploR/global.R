@@ -4,6 +4,8 @@ library(tm)
 library(SnowballC)
 library(ggplot2)
 
+source('setup_twitter_oauth.R')
+
 # twitteR OAuth authentication
 setup_twitter_oauth(consumer_key, consumer_secret,
                     access_token, access_secret)
