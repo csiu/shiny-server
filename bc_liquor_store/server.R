@@ -28,7 +28,7 @@ function(input, output, session) {
       geom_histogram()
   })
 
-  output$results <- renderTable({
+  output$results <- renderDataTable({
     filtered()
   })
 }
