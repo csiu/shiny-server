@@ -25,7 +25,10 @@ fluidPage(
     ),
 
     mainPanel(
-      plotOutput("coolplot"),
+      tabsetPanel(
+        tabPanel("Coolplot", plotOutput("coolplot")),
+        tabPanel("TODO")
+      ),
       br(), br(),
       dataTableOutput("results")
     )
