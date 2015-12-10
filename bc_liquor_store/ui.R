@@ -12,14 +12,19 @@ fluidPage(
                   0, 10, c(8, 10)),
       radioButtons("typeInput", "Product type",
                     choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
-                    selected = "WINE")
+                    selected = "WINE"),
+      hr(),
+      h3("Specific plot options"),
+      h4("Budget Drinks"),
+      selectInput("viridisInput", 'Viridis Theme',
+                  choices = c("A", "B", "C", "D"),
+                  selected = "D")
+
 #       checkboxGroupInput("typeInput", "Product type",
 #                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
 #                    selected = "WINE"),
 #       uiOutput("countryOutput"),
 #       #submitButton("Submit"),
-#       hr(),
-
 #       checkboxInput("sweetnessNAInput", 'Show "NA"',
 #                     value = TRUE),
 #       hr(),

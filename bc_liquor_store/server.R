@@ -2,6 +2,8 @@ library(shiny)
 library(viridis)
 
 function(input, output, session) {
+  viridisColor <- reactive({input$viridisInput})
+
   filtered <- reactive({
     bcl %>%
       filter(Price >= input$priceInput[1],
@@ -40,7 +42,7 @@ function(input, output, session) {
       dplyr::summarise(count = n()) %>%
       ggplot(aes(x = Type, y = count, fill = Sweetness)) +
       geom_bar(stat = "identity") +
-      scale_fill_viridis()
+      scale_fill_viridis(option = viridisColor())
   })
 
   output$sweetsubtypes <- renderPlot({
