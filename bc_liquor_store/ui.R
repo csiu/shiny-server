@@ -19,6 +19,7 @@ fluidPage(
       selectInput("viridisInput", 'Viridis Theme',
                   choices = c("A", "B", "C", "D"),
                   selected = "D"),
+      br(),
       h4("Cost of Subtypes"),
       numericInput("minPriceInput", "Min Cost ($)", value = 0),
       numericInput("maxPriceInput", "Max Cost ($)", value = 30250)
