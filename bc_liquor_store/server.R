@@ -102,7 +102,7 @@ function(input, output, session) {
   })
 
   output$results <- renderDataTable({
-    filtered() %>%
+    filtered_withMultiTypes() %>%
       arrange(desc(Sweetness))
   }, options = list(pageLength = 10))
 }

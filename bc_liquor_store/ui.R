@@ -25,9 +25,11 @@ fluidPage(
       numericInput("maxPriceInput", "Max Cost ($)", value = 30250),
       br(),
       h4("Alcohol Content and Sweetness"),
+      p("Note: These changes are also reflected in the recommendation list."),
       checkboxGroupInput("multitypeInput", "Products selected",
                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
                    selected = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"))
+
 #       uiOutput("countryOutput"),
 #       #submitButton("Submit"),
 #       checkboxInput("sweetnessNAInput", 'Show "NA"',
