@@ -1,4 +1,5 @@
 library(shiny)
+library(viridis)
 
 function(input, output, session) {
 #   output$countryOutput <- renderUI({
@@ -21,21 +22,23 @@ function(input, output, session) {
 #   })
 
   filtered <- reactive({
-    if (is.null(input$countryInput)) {
-      return(NULL)
-    }
-
     bcl %>%
       filter(Price >= input$priceInput[1],
-             Price <= input$priceInput[2],
-             Type == input$typeInput,
-             Country == input$countryInput
+             Price <= input$priceInput[2]
       )
   })
 
+  output$budgetdrinks <- renderPlot({
     if (is.null(filtered())) {
       return()
     }
+    filtered() %>%
+      filter(Sweetness > 7) %>%
+      group_by(Type, Sweetness) %>%
+      dplyr::summarise(count = n()) %>%
+      ggplot(aes(x = Type, y = count, fill = Sweetness)) +
+      geom_bar(stat = "identity") +
+      scale_fill_viridis()
   })
 
 #   output$coolplot <- renderPlot({

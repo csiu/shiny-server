@@ -28,6 +28,7 @@ fluidPage(
       tabsetPanel(
 #         tabPanel("Coolplot", plotOutput("coolplot")),
 #         tabPanel("TODO")
+        tabPanel("Budget Drinks", plotOutput("budgetdrinks"))
       ),
       br(), br(),
       dataTableOutput("results")
