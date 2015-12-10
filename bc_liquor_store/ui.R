@@ -29,7 +29,8 @@ fluidPage(
 #         tabPanel("Coolplot", plotOutput("coolplot")),
 #         tabPanel("TODO")
         tabPanel("Budget Drinks", plotOutput("budgetdrinks")),
-        tabPanel("Sweetness of Subtypes", plotOutput("sweetsubtypes"))
+        tabPanel("Sweetness of Subtypes", plotOutput("sweetsubtypes")),
+        tabPanel("Cost of Subtypes", plotOutput("costsubtypes"))
       ),
       br(), br(),
       dataTableOutput("results")

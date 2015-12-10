@@ -28,6 +28,20 @@ function(input, output, session) {
       )
   })
 
+  filtered_subtype_price_count <- reactive({
+    dat.sweet <- bcl %>%
+      filter(Type == "WINE",
+             Sweetness > 7) %>%
+      #mutate(Price = round(Price, -1)) %>% ## uncomment to round Price to nearest $10?
+      group_by(Subtype, Price) %>%
+      dplyr::summarise(count = n())
+
+    ## Reorder factor
+    dat.sweet$Subtype <- with(dat.sweet, reorder(Subtype, Price, function(x){-max(x)}))
+
+    dat.sweet
+  })
+
   output$budgetdrinks <- renderPlot({
     if (is.null(filtered())) {
       return()
@@ -61,6 +75,19 @@ function(input, output, session) {
       theme(legend.position = "none")
   })
 
+  output$costsubtypes <- renderPlot({
+    filtered_subtype_price_count() %>%
+      ggplot(aes(x = Price, y = 1, size = count)) +
+      geom_point(colour="black", fill="blue", pch=21, alpha = 0.3) +
+      ylab("") +
+      facet_grid(Subtype~.) +
+      theme(
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        strip.text.y = element_text(size = 6, angle = 360),
+        legend.position = "top"
+      )
+  })
 #   output$coolplot <- renderPlot({
 #     if (is.null(filtered())) {
 #       return()
