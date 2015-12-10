@@ -89,7 +89,7 @@ function(input, output, session) {
       theme(
         axis.text.y = element_blank(),
         axis.ticks.y = element_blank(),
-        strip.text.y = element_text(size = 6, angle = 360),
+        strip.text.y = element_text(size = 7, angle = 360),
         legend.position = "top"
       )
   })
