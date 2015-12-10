@@ -17,13 +17,13 @@ function(input, output, session) {
     filtered() %>%
       filter(Type == input$typeInput)
   })
-
   filtered_subtype_price_count <- reactive({
     dat.sweet <- bcl %>%
       filter(Type == input$typeInput,
              Sweetness >= input$sweetnessInput[1],
-             Sweetness <= input$sweetnessInput[2]) %>%
-      #mutate(Price = round(Price, -1)) %>% ## uncomment to round Price to nearest $10?
+             Sweetness <= input$sweetnessInput[2],
+             Price >= input$minPriceInput,
+             Price <= input$maxPriceInput) %>%
       group_by(Subtype, Price) %>%
       dplyr::summarise(count = n())
 

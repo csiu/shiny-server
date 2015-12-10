@@ -18,7 +18,10 @@ fluidPage(
       h4("Budget Drinks"),
       selectInput("viridisInput", 'Viridis Theme',
                   choices = c("A", "B", "C", "D"),
-                  selected = "D")
+                  selected = "D"),
+      h4("Cost of Subtypes"),
+      numericInput("minPriceInput", "Min Cost ($)", value = 0),
+      numericInput("maxPriceInput", "Max Cost ($)", value = 30250)
 
 #       checkboxGroupInput("typeInput", "Product type",
 #                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
