@@ -9,7 +9,10 @@ fluidPage(
       sliderInput("priceInput", "Price",
                   0, 100, c(0, 15), pre = "$"),
       sliderInput("sweetnessInput", "Sweetness",
-                  0, 10, c(8, 10))
+                  0, 10, c(8, 10)),
+      radioButtons("typeInput", "Product type",
+                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
+                    selected = "WINE")
 #       checkboxGroupInput("typeInput", "Product type",
 #                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
 #                    selected = "WINE"),

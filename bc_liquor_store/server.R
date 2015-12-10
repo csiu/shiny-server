@@ -30,9 +30,14 @@ function(input, output, session) {
       )
   })
 
+  filtered_withTypes <- reactive({
+    filtered() %>%
+      filter(Type == input$typeInput)
+  })
+
   filtered_subtype_price_count <- reactive({
     dat.sweet <- bcl %>%
-      filter(Type == "WINE",
+      filter(Type == input$typeInput,
              Sweetness >= input$sweetnessInput[1],
              Sweetness <= input$sweetnessInput[2]) %>%
       #mutate(Price = round(Price, -1)) %>% ## uncomment to round Price to nearest $10?
@@ -61,8 +66,7 @@ function(input, output, session) {
     if (is.null(filtered())) {
       return()
     }
-    filtered() %>%
-      filter(Type == "WINE") %>%
+    filtered_withTypes() %>%
       group_by(Sweetness, Subtype) %>%
       dplyr::summarise(count = n()) %>%
       ggplot(aes(x = Sweetness,
