@@ -31,10 +31,6 @@ fluidPage(
 #       #submitButton("Submit"),
 #       checkboxInput("sweetnessNAInput", 'Show "NA"',
 #                     value = TRUE),
-#       hr(),
-#       radioButtons("colorInput", "Color",
-#                    choices = c("A", "B", "C"),
-#                    selected = "A")
     ),
 
     mainPanel(
