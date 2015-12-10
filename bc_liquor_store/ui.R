@@ -7,15 +7,16 @@ fluidPage(
     sidebarPanel(
       #helpText("Hello world"),
       sliderInput("priceInput", "Price",
-                  0, 100, c(0, 15), pre = "$")
+                  0, 100, c(0, 15), pre = "$"),
+      sliderInput("sweetnessInput", "Sweetness",
+                  0, 10, c(8, 10))
 #       checkboxGroupInput("typeInput", "Product type",
 #                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
 #                    selected = "WINE"),
 #       uiOutput("countryOutput"),
 #       #submitButton("Submit"),
 #       hr(),
-#       sliderInput("sweetnessInput", "Sweetness",
-#                   0, 10, c(0, 10)),
+
 #       checkboxInput("sweetnessNAInput", 'Show "NA"',
 #                     value = TRUE),
 #       hr(),

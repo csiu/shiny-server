@@ -24,14 +24,17 @@ function(input, output, session) {
   filtered <- reactive({
     bcl %>%
       filter(Price >= input$priceInput[1],
-             Price <= input$priceInput[2]
+             Price <= input$priceInput[2],
+             Sweetness >= input$sweetnessInput[1],
+             Sweetness <= input$sweetnessInput[2]
       )
   })
 
   filtered_subtype_price_count <- reactive({
     dat.sweet <- bcl %>%
       filter(Type == "WINE",
-             Sweetness > 7) %>%
+             Sweetness >= input$sweetnessInput[1],
+             Sweetness <= input$sweetnessInput[2]) %>%
       #mutate(Price = round(Price, -1)) %>% ## uncomment to round Price to nearest $10?
       group_by(Subtype, Price) %>%
       dplyr::summarise(count = n())
@@ -47,7 +50,6 @@ function(input, output, session) {
       return()
     }
     filtered() %>%
-      filter(Sweetness > 7) %>%
       group_by(Type, Sweetness) %>%
       dplyr::summarise(count = n()) %>%
       ggplot(aes(x = Type, y = count, fill = Sweetness)) +
@@ -60,8 +62,7 @@ function(input, output, session) {
       return()
     }
     filtered() %>%
-      filter(Sweetness > 7,
-             Type == "WINE") %>%
+      filter(Type == "WINE") %>%
       group_by(Sweetness, Subtype) %>%
       dplyr::summarise(count = n()) %>%
       ggplot(aes(x = Sweetness,
@@ -91,7 +92,6 @@ function(input, output, session) {
 
   output$alcoholpersweetness <- renderPlot({
     filtered() %>%
-      filter(Sweetness > 7) %>%
       ggplot(aes(x = as.factor(Sweetness),
                  y = Alcohol_Content,
                  group = Sweetness)) +
