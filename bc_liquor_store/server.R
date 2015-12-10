@@ -136,6 +136,7 @@ function(input, output, session) {
 #   })
 #
   output$results <- renderDataTable({
-    filtered()
-  })
+    filtered() %>%
+      arrange(desc(Sweetness))
+  }, options = list(pageLength = 10))
 }
