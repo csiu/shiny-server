@@ -41,6 +41,26 @@ function(input, output, session) {
       scale_fill_viridis()
   })
 
+  output$sweetsubtypes <- renderPlot({
+    if (is.null(filtered())) {
+      return()
+    }
+    filtered() %>%
+      filter(Sweetness > 7,
+             Type == "WINE") %>%
+      group_by(Sweetness, Subtype) %>%
+      dplyr::summarise(count = n()) %>%
+      ggplot(aes(x = Sweetness,
+                 y = reorder(Subtype, Sweetness),
+                 label = count,
+                 size = count)) +
+      geom_point(alpha = 0.5, color = "orange") +
+      geom_text(color = "black") +
+      scale_size(range = c(3,8)) +
+      ylab("") +
+      theme(legend.position = "none")
+  })
+
 #   output$coolplot <- renderPlot({
 #     if (is.null(filtered())) {
 #       return()
