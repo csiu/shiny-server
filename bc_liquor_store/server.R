@@ -88,6 +88,24 @@ function(input, output, session) {
         legend.position = "top"
       )
   })
+
+  output$alcoholpersweetness <- renderPlot({
+    filtered() %>%
+      filter(Sweetness > 7) %>%
+      ggplot(aes(x = as.factor(Sweetness),
+                 y = Alcohol_Content,
+                 group = Sweetness)) +
+      geom_violin(alpha = 0.3) +
+      geom_jitter(
+        aes(color = Type),
+        alpha = 0.6,
+        size = 3,
+        position = position_jitter(width = .1,
+                                   height = 0)) +
+      scale_size(range = c(3,8)) +
+      xlab("Sweetness") +
+      ylab("Alcohol content")
+  })
 #   output$coolplot <- renderPlot({
 #     if (is.null(filtered())) {
 #       return()
