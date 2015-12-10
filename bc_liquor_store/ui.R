@@ -22,11 +22,12 @@ fluidPage(
       br(),
       h4("Cost of Subtypes"),
       numericInput("minPriceInput", "Min Cost ($)", value = 0),
-      numericInput("maxPriceInput", "Max Cost ($)", value = 30250)
-
-#       checkboxGroupInput("typeInput", "Product type",
-#                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
-#                    selected = "WINE"),
+      numericInput("maxPriceInput", "Max Cost ($)", value = 30250),
+      br(),
+      h4("Alcohol Content and Sweetness"),
+      checkboxGroupInput("multitypeInput", "Products selected",
+                   choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
+                   selected = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"))
 #       uiOutput("countryOutput"),
 #       #submitButton("Submit"),
 #       checkboxInput("sweetnessNAInput", 'Show "NA"',

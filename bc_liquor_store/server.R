@@ -17,6 +17,12 @@ function(input, output, session) {
     filtered() %>%
       filter(Type == input$typeInput)
   })
+
+  filtered_withMultiTypes <- reactive({
+    filtered() %>%
+      filter(Type %in% input$multitypeInput)
+  })
+
   filtered_subtype_price_count <- reactive({
     dat.sweet <- bcl %>%
       filter(Type == input$typeInput,
@@ -78,7 +84,7 @@ function(input, output, session) {
   })
 
   output$alcoholpersweetness <- renderPlot({
-    filtered() %>%
+    filtered_withMultiTypes() %>%
       ggplot(aes(x = as.factor(Sweetness),
                  y = Alcohol_Content,
                  group = Sweetness)) +
@@ -90,6 +96,7 @@ function(input, output, session) {
         position = position_jitter(width = .1,
                                    height = 0)) +
       scale_size(range = c(3,8)) +
+      scale_colour_discrete(drop=TRUE, limits = levels(filtered_withMultiTypes()$Type)) +
       xlab("Sweetness") +
       ylab("Alcohol content")
   })
