@@ -1,7 +1,7 @@
 library(shiny)
 
 fluidPage(
-  titlePanel("BC Liquor Store prices"),
+  titlePanel(HTML("<span style='font-weight: 400'>Prices at the </span><span style='font-weight: 900'>BC LIQUOR</span><span style='font-weight: 200'>STORE</span> &mdash; Discover Sweetness")),
 
   sidebarLayout(
     sidebarPanel(
