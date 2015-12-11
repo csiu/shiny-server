@@ -5,7 +5,6 @@ fluidPage(
 
   sidebarLayout(
     sidebarPanel(
-      #helpText("Hello world"),
       sliderInput("priceInput", "Price",
                   0, 100, c(0, 15), pre = "$"),
       sliderInput("sweetnessInput", "Sweetness",
@@ -29,11 +28,6 @@ fluidPage(
       checkboxGroupInput("multitypeInput", "Products selected",
                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
                    selected = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"))
-
-#       uiOutput("countryOutput"),
-#       #submitButton("Submit"),
-#       checkboxInput("sweetnessNAInput", 'Show "NA"',
-#                     value = TRUE),
     ),
 
     mainPanel(
