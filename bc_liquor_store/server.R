@@ -103,6 +103,7 @@ function(input, output, session) {
 
   output$results <- renderDataTable({
     filtered_withMultiTypes() %>%
-      arrange(desc(Sweetness))
+      arrange(desc(Sweetness),
+              Price)
   }, options = list(pageLength = 10))
 }
