@@ -8,6 +8,7 @@ output:
 ---
 ```{r include=FALSE}
 knitr::opts_chunk$set(fig.path = "figs/")
+options(knitr.table.format = "markdown")
 ```
 
 ```{r message=FALSE}

@@ -51,14 +51,14 @@ Example: Let say I'm willing to spend $0 (obvious starting point) to $15, then i
 
 
 
-Type          Subtype          Country    Name                                        Alcohol_Content   Price   Sweetness
-------------  ---------------  ---------  -----------------------------------------  ----------------  ------  ----------
-REFRESHMENT   SPIRIT           CANADA     SMIRNOFF - ICE RASPBERRY                                5.0    9.99          10
-REFRESHMENT   SPIRIT           CANADA     PALM BAY STRAWBERRY PINEAPPLE SPRITZ CAN                5.0    9.99          10
-WINE          PORT             PORTUGAL   WARRE'S - WARRIOR RESERVE                              20.0   13.49          10
-WINE          ICE WINE WHITE   CANADA     INNISKILLIN NIAGARA - VIDAL ICEWINE 2012                9.5    7.99          10
-WINE          VERMOUTH         ITALY      MARTINI - ROSATO                                       15.0   12.99          10
-REFRESHMENT   SPIRIT           CANADA     SMIRNOFF - ICE ORANGE SCREWDRIVER                       5.0    9.99          10
+|Type        |Subtype        |Country  |Name                                     | Alcohol_Content| Price| Sweetness|
+|:-----------|:--------------|:--------|:----------------------------------------|---------------:|-----:|---------:|
+|REFRESHMENT |SPIRIT         |CANADA   |SMIRNOFF - ICE RASPBERRY                 |             5.0|  9.99|        10|
+|REFRESHMENT |SPIRIT         |CANADA   |PALM BAY STRAWBERRY PINEAPPLE SPRITZ CAN |             5.0|  9.99|        10|
+|WINE        |PORT           |PORTUGAL |WARRE'S - WARRIOR RESERVE                |            20.0| 13.49|        10|
+|WINE        |ICE WINE WHITE |CANADA   |INNISKILLIN NIAGARA - VIDAL ICEWINE 2012 |             9.5|  7.99|        10|
+|WINE        |VERMOUTH       |ITALY    |MARTINI - ROSATO                         |            15.0| 12.99|        10|
+|REFRESHMENT |SPIRIT         |CANADA   |SMIRNOFF - ICE ORANGE SCREWDRIVER        |             5.0|  9.99|        10|
 
 Now that we have a list, what on earth is a "REFRESHMENT"? Why is "WINE" on the list? I thought wine is not sweet...
 
