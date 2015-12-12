@@ -4,6 +4,7 @@ library(viridis)
 function(input, output, session) {
   viridisColor <- reactive({input$viridisInput})
 
+  # The data frames ---------------------------------------------------------
   filtered <- reactive({
     bcl %>%
       filter(Price >= input$priceInput[1],
@@ -32,12 +33,52 @@ function(input, output, session) {
              Price <= input$maxPriceInput) %>%
       group_by(Subtype, Price) %>%
       dplyr::summarise(count = n())
-
     ## Reorder factor
     dat.sweet$Subtype <- with(dat.sweet, reorder(Subtype, Price, function(x){-max(x)}))
-
     dat.sweet
   })
+
+  # The counts --------------------------------------------------------------
+  output$summaryfiltered <- renderText({
+    numOptions <- nrow(filtered())
+    if (is.null(numOptions)) {
+      numOptions <- 0
+    }
+    paste0("We found ", numOptions, " options for you")
+  })
+
+  output$summaryfiltered_withMultiTypes <- renderText({
+    numOptions <- nrow(filtered_withMultiTypes())
+    if (is.null(numOptions)) {
+      numOptions <- 0
+    }
+    paste0("We found ", numOptions, " options for you")
+  })
+
+  output$summaryfiltered_withTypes <- renderText({
+    numOptions <- nrow(filtered_withTypes())
+    if (is.null(numOptions)) {
+      numOptions <- 0
+    }
+    if (numOptions == 1) {
+      paste0("There is ", numOptions, " drink here")
+    } else {
+      paste0("There are ", numOptions, " drinks here")
+    }
+  })
+
+  output$summaryfiltered_subtype_price_count <- renderText({
+    numOptions <- nrow(filtered_subtype_price_count())
+    if (is.null(numOptions)) {
+      numOptions <- 0
+    }
+    if (numOptions == 1) {
+      paste0("There is ", numOptions, " drink here")
+    } else {
+      paste0("There are ", numOptions, " drinks here")
+    }
+  })
+
 
   output$budgetdrinks <- renderPlot({
     if (is.null(filtered())) {
@@ -51,6 +92,7 @@ function(input, output, session) {
       scale_fill_viridis(option = viridisColor())
   })
 
+  # The plots ---------------------------------------------------------------
   output$sweetsubtypes <- renderPlot({
     if (is.null(filtered())) {
       return()
@@ -101,6 +143,7 @@ function(input, output, session) {
       ylab("Alcohol content")
   })
 
+  # The table ---------------------------------------------------------------
   output$results <- renderDataTable({
     filtered_withMultiTypes() %>%
       arrange(desc(Sweetness),

@@ -32,12 +32,25 @@ fluidPage(
 
     mainPanel(
       tabsetPanel(
-        tabPanel("Budget Drinks", plotOutput("budgetdrinks")),
-        tabPanel("Sweetness of Subtypes", plotOutput("sweetsubtypes")),
-        tabPanel("Cost of Subtypes", plotOutput("costsubtypes")),
-        tabPanel("Alcohol content and Sweetness", plotOutput("alcoholpersweetness"))
+        tabPanel("Budget Drinks",
+                 br(),
+                 h4(textOutput("summaryfiltered")),
+                 plotOutput("budgetdrinks")),
+        tabPanel("Sweetness of Subtypes",
+                 br(),
+                 h4(textOutput("summaryfiltered_withTypes")),
+                 plotOutput("sweetsubtypes")),
+        tabPanel("Cost of Subtypes",
+                 br(),
+                 h4(textOutput("summaryfiltered_subtype_price_count")),
+                 plotOutput("costsubtypes")),
+        tabPanel("Alcohol content and Sweetness",
+                 br(),
+                 h4(textOutput("summaryfiltered_withMultiTypes")),
+                 plotOutput("alcoholpersweetness"))
       ),
-      br(), br(),
+      br(),
+      br(),
       dataTableOutput("results")
     )
   )
