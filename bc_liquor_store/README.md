@@ -1,16 +1,10 @@
----
-title: "Building Shiny app"
-author: "csiu"
-date: "December 8, 2015"
-output: 
-    html_document:
-        keep_md: yes
----
-```{r include=FALSE}
-knitr::opts_chunk$set(fig.path = "figs/")
-```
+# Building Shiny app
+csiu  
+December 8, 2015  
 
-```{r message=FALSE}
+
+
+```r
 library(dplyr)
 library(ggplot2)
 library(viridis)
@@ -30,7 +24,8 @@ I'm not much of an alcohol drinker, so I don't know what's good. I had a couple 
 
 The data that we will explore comes from the [BC Liquor Store Product Price List](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices) by OpenDataBC. And the actual version of the data that we will explore is available at: https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/shiny_supp/2015/bcl-data.csv.
 
-```{r}
+
+```r
 bcl <- "https://rawgit.com/STAT545-UBC/STAT545-UBC.github.io/master/shiny_supp/2015/bcl-data.csv" %>% 
   readr::read_csv()
 ```
@@ -44,7 +39,8 @@ I am by no means rich. I am a student and a budget. In this app, I want to be ab
 
 Example: Let say I'm willing to spend $0 (obvious starting point) to $15, then it is recommended I buy ...
 
-```{r}
+
+```r
 (dat.budget <- bcl %>% 
   filter(Price >= 0,
          Price <= 15) %>% 
@@ -53,11 +49,23 @@ Example: Let say I'm willing to spend $0 (obvious starting point) to $15, then i
   knitr::kable()
 ```
 
+
+
+Type          Subtype          Country    Name                                        Alcohol_Content   Price   Sweetness
+------------  ---------------  ---------  -----------------------------------------  ----------------  ------  ----------
+REFRESHMENT   SPIRIT           CANADA     SMIRNOFF - ICE RASPBERRY                                5.0    9.99          10
+REFRESHMENT   SPIRIT           CANADA     PALM BAY STRAWBERRY PINEAPPLE SPRITZ CAN                5.0    9.99          10
+WINE          PORT             PORTUGAL   WARRE'S - WARRIOR RESERVE                              20.0   13.49          10
+WINE          ICE WINE WHITE   CANADA     INNISKILLIN NIAGARA - VIDAL ICEWINE 2012                9.5    7.99          10
+WINE          VERMOUTH         ITALY      MARTINI - ROSATO                                       15.0   12.99          10
+REFRESHMENT   SPIRIT           CANADA     SMIRNOFF - ICE ORANGE SCREWDRIVER                       5.0    9.99          10
+
 Now that we have a list, what on earth is a "REFRESHMENT"? Why is "WINE" on the list? I thought wine is not sweet...
 
 > What else is on this list budget-friendly list of alcohol for Sweetness level >7?
 
-```{r budgetdrinks}
+
+```r
 dat.budget %>% 
   filter(Sweetness > 7) %>% 
   group_by(Type, Sweetness) %>% 
@@ -66,6 +74,8 @@ dat.budget %>%
   geom_bar(stat = "identity") +
   scale_fill_viridis()  
 ```
+
+![](figs/budgetdrinks-1.png) 
 
 Here we see that for a budget friendly-drink ($0-$15) and a Sweetness level of >7, 
 
@@ -78,7 +88,8 @@ With the bulk of the recommendations being WIND, I wonder what subtypes does thi
 
 > Given a budget of $0-$15 and a sweetness level of >7, what are the subtypes of WINE?
 
-```{r sweetsubtypes}
+
+```r
 dat.budget %>% 
   filter(Sweetness > 7,
          Type == "WINE") %>% 
@@ -95,13 +106,16 @@ dat.budget %>%
   theme(legend.position = "none")
 ```
 
+![](figs/sweetsubtypes-1.png) 
+
 Here we can see that there is a variety of WINE options -- none of which I'm familiar with. I know what FRUIT is, but what is "VERMOUTH"? Is it expensive?
 
 ## Cost of WINE subtypes
 
 > What is the cost distribution of each subtype of sweet WINE (e.g. Sweetness > 7)?
 
-```{r subtypecosts}
+
+```r
 dat.sweetwine <- bcl %>% 
   filter(Type == "WINE",
          Sweetness > 7) %>% 
@@ -123,6 +137,8 @@ dat.sweetwine %>%
   )
 ```
 
+![](figs/subtypecosts-1.png) 
+
 Here we see that:
 
 - It costs ~$4000 for PORT (Wow, this is some expensive taste)
@@ -134,7 +150,8 @@ Going back to our budget-friendly ($0-$15) recommendation list, what about alcoh
 
 > Given a budget of $0-$15 and a sweetness level of >7, what is the distribution of alcohol content at each sweetness level?
 
-```{r alchoholandsweets}
+
+```r
 dat.budget %>% 
   filter(Sweetness > 7) %>% 
   ggplot(aes(x = as.factor(Sweetness), 
@@ -152,6 +169,8 @@ dat.budget %>%
   ylab("Alcohol content")
 ```
 
+![](figs/alchoholandsweets-1.png) 
+
 Here we see that: 
 
 - at sweetness 10, there is a broad range of alcohol content 
@@ -161,13 +180,23 @@ Here we see that:
 
 ## Conclusion
 
-Overall, from the list of `r nrow(bcl)` drinks, I wouldn't be apposed to trying these drinks:
+Overall, from the list of 6132 drinks, I wouldn't be apposed to trying these drinks:
 
-```{r}
+
+```r
 bcl %>% 
   filter(Price <= 15,
          Sweetness == 10,
          Type %in% c("REFRESHMENT", "SPIRITS")) %>% 
   knitr::kable(format = "markdown")
 ```
+
+
+
+|Type        |Subtype             |Country |Name                                     | Alcohol_Content| Price| Sweetness|
+|:-----------|:-------------------|:-------|:----------------------------------------|---------------:|-----:|---------:|
+|REFRESHMENT |SPIRIT              |CANADA  |SMIRNOFF - ICE RASPBERRY                 |               5|  9.99|        10|
+|REFRESHMENT |SPIRIT              |CANADA  |PALM BAY STRAWBERRY PINEAPPLE SPRITZ CAN |               5|  9.99|        10|
+|REFRESHMENT |SPIRIT              |CANADA  |SMIRNOFF - ICE ORANGE SCREWDRIVER        |               5|  9.99|        10|
+|SPIRITS     |SPIRIT - GIFT PACKS |FRANCE  |PINNACLE - CANDY CANE GIFT PACK          |              35| 13.99|        10|
 
