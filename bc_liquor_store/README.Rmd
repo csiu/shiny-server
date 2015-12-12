@@ -21,15 +21,15 @@ library(viridis)
 
 **Work so far**
 
-In a class activity, we made a [Shiny app that lets us search for products from the BC Liquor Store based on price, alcohol type, and country](http://stat545-ubc.github.io/shiny01_activity.html#final-shiny-app-code). In the followup "[Building Shiny apps](http://stat545-ubc.github.io/hw11_shiny.html)" homework, I will modify the app to explore sweetness.
+In a class activity, we made a [Shiny app that lets us search for products from the BC Liquor Store based on price, alcohol type, and country](http://stat545-ubc.github.io/shiny01_activity.html#final-shiny-app-code). In the following "[Building Shiny apps](http://stat545-ubc.github.io/hw11_shiny.html)" homework, I will modify the app to explore sweetness.
 
 **My drinking preferences**
 
-I'm not much of an alcohol drinker, so I don't know what's good. I had a couple sips of beer here and there, but nothing worth my fancy and wrote off beer as generally tasting awful. A colleague once told me that "beer does not taste good the first 10 times you try it, but after that, beer will taste good". I am quite skeptical. All I know is that beer is not sweet and leaves a gross aftertaste. This is also true for wine. All I know is that cocktails (and anything that is sweet or tastes like juice) is the way to go. I could be wrong. And here we will explore my drinking options.
+I'm not much of an alcohol drinker, so I don't know what's good. I had a couple sips of beer here and there, but nothing worth my fancy and wrote off beer as generally awful tasting. A colleague once told me that "beer does not taste good the first 10 times you try it, but after that, beer will taste good". I am quite skeptical. All I know is that beer is not sweet and leaves a gross aftertaste. This is also true for wine. All I know is that cocktails (and anything that is sweet or taste like juice) is the way to go. I could be wrong. And here we will explore and expand my drinking options.
 
 **The data**
 
-The data that we will explore comes from the [BC Liquor Store Product Price List](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices) by OpenDataBC. And the actual version of the data that we will explore is available at: https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/shiny_supp/2015/bcl-data.csv.
+The data that we will explore comes from the [BC Liquor Store Product Price List](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices) by OpenDataBC. And the actual version of the data that will explore is available at: https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/shiny_supp/2015/bcl-data.csv.
 
 ```{r}
 bcl <- "https://rawgit.com/STAT545-UBC/STAT545-UBC.github.io/master/shiny_supp/2015/bcl-data.csv" %>% 
@@ -39,11 +39,11 @@ bcl <- "https://rawgit.com/STAT545-UBC/STAT545-UBC.github.io/master/shiny_supp/2
 
 ### Finding the sweetest budget-friendly drink
 
-I am by no means rich. I am a student and a budget. In this app, I want to be able to answer this question:
+I am by no means rich. I am a student and have a budget. In this app, I want to be able to answer this question:
 
 > Given a budget, what is the sweetest drink I can buy?
 
-Example: Let say I'm willing to spend $0 (obvious starting point) to $15, then it is recommended I buy ...
+Example: Let say I'm willing to spend $0 (obvious starting point) to $15, then it is recommended I should buy ...
 
 ```{r}
 (dat.budget <- bcl %>% 
@@ -56,7 +56,7 @@ Example: Let say I'm willing to spend $0 (obvious starting point) to $15, then i
 
 Now that we have a list, what on earth is a "REFRESHMENT"? Why is "WINE" on the list? I thought wine is not sweet...
 
-> What else is on this list budget-friendly list of alcohol for Sweetness level >7?
+> What else is on this budget-friendly list of alcohol for Sweetness level >7?
 
 ```{r budgetdrinks}
 dat.budget %>% 
@@ -75,7 +75,7 @@ Here we see that for a budget friendly-drink ($0-$15) and a Sweetness level of >
 - no BEER made this list
 
 ## Subtypes of sweet WINE
-With the bulk of the recommendations being WIND, I wonder what subtypes does this listing refer to:
+With the bulk of the recommendations being WINE, I wonder what subtypes does this listing refer to i.e.
 
 > Given a budget of $0-$15 and a sweetness level of >7, what are the subtypes of WINE?
 
@@ -106,7 +106,6 @@ Here we can see that there is a variety of WINE options -- none of which I'm fam
 dat.sweetwine <- bcl %>% 
   filter(Type == "WINE",
          Sweetness > 7) %>% 
-  #mutate(Price = round(Price, -1)) %>% ## uncomment to round Price to nearest $10?
   group_by(Subtype, Price) %>% 
   summarise(count = n())
 
@@ -126,7 +125,7 @@ dat.sweetwine %>%
 
 Here we see that:
 
-- It costs ~$4000 for PORT (Wow, this is some expensive taste)
+- The most expensive drink -- retailing at ~$4000 -- is PORT (Wow, this is some expensive taste)
 - TABLE WHITE WINE is also expensive
 - VERMOUTH -- in comparision -- is relatively cheap
 
