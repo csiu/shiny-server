@@ -22,7 +22,7 @@ I'm not much of an alcohol drinker, so I don't know what's good. I had a couple 
 
 **The data**
 
-The data that we will explore comes from the [BC Liquor Store Product Price List](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices) by OpenDataBC. And the actual version of the data that will explore is available at: https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/shiny_supp/2015/bcl-data.csv.
+The data that we will explore comes from the [BC Liquor Store Product Price List](https://www.opendatabc.ca/dataset/bc-liquor-store-product-price-list-current-prices) by OpenDataBC. And the actual version of the data that will be explored is available at: https://github.com/STAT545-UBC/STAT545-UBC.github.io/blob/master/shiny_supp/2015/bcl-data.csv.
 
 
 ```r
