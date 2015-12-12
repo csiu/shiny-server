@@ -14,7 +14,7 @@ library(viridis)
 
 **Work so far**
 
-In a class activity, we made a [Shiny app that lets us search for products from the BC Liquor Store based on price, alcohol type, and country](http://stat545-ubc.github.io/shiny01_activity.html#final-shiny-app-code). In the following "[Building Shiny apps](http://stat545-ubc.github.io/hw11_shiny.html)" homework, I will modify the app to explore sweetness.
+In a class activity, we made a [Shiny app that lets us search for products from the BC Liquor Store based on price, alcohol type, and country](http://stat545-ubc.github.io/shiny01_activity.html#final-shiny-app-code). In the following "[Building Shiny apps](http://stat545-ubc.github.io/hw11_shiny.html)" homework, I will modify the app (available at [https://csiu.shinyapps.io/bc_liquor_store](https://csiu.shinyapps.io/bc_liquor_store)) to explore sweetness.
 
 **My drinking preferences**
 
