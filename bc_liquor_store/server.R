@@ -126,6 +126,7 @@ function(input, output, session) {
   })
 
   output$alcoholpersweetness <- renderPlot({
+    set.seed(100)
     filtered_withMultiTypes() %>%
       ggplot(aes(x = as.factor(Sweetness),
                  y = Alcohol_Content,
