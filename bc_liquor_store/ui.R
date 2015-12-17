@@ -19,16 +19,13 @@ fluidPage(
                     selected = "D")
       ),
       conditionalPanel(
-        condition="input.conditionedPanels == 'Sweetness of Subtypes'",
+        condition="input.conditionedPanels == 'Sweetness of Subtypes' || input.conditionedPanels == 'Cost of Subtypes'",
         radioButtons("typeInput", "Product type",
                      choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
                      selected = "WINE")
       ),
       conditionalPanel(
         condition="input.conditionedPanels == 'Cost of Subtypes'",
-        radioButtons("typeInput", "Product type",
-                     choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
-                     selected = "WINE"),
         br(),
         h4("Cost of Subtypes"),
         numericInput("minPriceInput", "Min Cost ($)", value = 0),
